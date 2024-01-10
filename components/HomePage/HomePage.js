@@ -4,7 +4,6 @@ import FuelStationSvg from "../../assets/png/fuel-station.png";
 import Logo from "../../assets/png/logo.png";
 
 export default function HomePage(props) {
-
   return (
     <>
       {props.isOpen && (
@@ -25,6 +24,10 @@ export default function HomePage(props) {
             <Pressable style={styles.button} onPress={openMap}>
               <Text style={styles.buttonText}>Все Заправки</Text>
             </Pressable> */}
+            <Image
+              source={{ uri: "http://www.clicktorelease.com/code/gif/1.gif" }}
+              style={{ width: 100, height: 100 }}
+            />
           </View>
           <Text style={styles.footerText}>avtoenergy.uz</Text>
           <Image source={Logo} style={styles.logo} />

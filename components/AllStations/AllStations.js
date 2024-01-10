@@ -1,17 +1,52 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, Image, SafeAreaView } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  SafeAreaView,
+  ScrollView,
+} from "react-native";
 import MapView, { Marker, Callout } from "react-native-maps";
+import StationCard from "./StationCard";
 import FiltersIcon from "../../assets/png/filters.png";
 
 export default function AllStations() {
+  const apiUrl = "http://24.199.110.105:8500/api/";
+  const [dataFromUrl, setDataFromUrl] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        setDataFromUrl(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
   return (
     <>
       <SafeAreaView style={styles.container}>
-        <View style={styles.filters}>
-          <Text style={styles.heading}>Ближайшие Заправки</Text>
-          <Image source={FiltersIcon} style={styles.filterIconStyles}/>
-        </View>
-
+        <ScrollView style={styles.containerWrapper}>
+          <View style={styles.filters}>
+            <Text style={styles.heading}>Ближайшие Заправки</Text>
+            <Image source={FiltersIcon} style={styles.filterIconStyles} />
+          </View>
+          {
+            dataFromUrl && dataFromUrl.map((item, index) => {
+              return (
+                <StationCard key={index} item={item}/>
+              )
+            })
+          }
+          
+        </ScrollView>
       </SafeAreaView>
     </>
   );
@@ -20,12 +55,8 @@ export default function AllStations() {
 const styles = StyleSheet.create({
   container: {
     paddingTop: 50,
-    paddingLeft: 20,
-    paddingRight: 20,
     width: "100%",
-    height: "100%",
     backgroundColor: "#2F2F2F",
-    boxSizing: "border-box",
   },
   filters: {
     width: "100%",
@@ -33,6 +64,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    marginBottom: 20,
   },
   filterIconStyles: {
     width: 21,
@@ -42,5 +74,9 @@ const styles = StyleSheet.create({
   heading: {
     fontSize: 22,
     color: "white",
-  }
+  },
+  containerWrapper: {
+    paddingHorizontal: 20,
+    height: "100%",
+  },
 });
