@@ -8,13 +8,16 @@ export default function Stationcard(props) {
   return (
     <View style={styles.cardContainer}>
       <View style={styles.cardLogoContainer}>
-        <Image style={styles.cardImage} source={{uri: `${props.item.logo}`,} } />
+        <Image
+          style={styles.cardImage}
+          source={{ uri: `${props.item.logo}` }}
+        />
       </View>
       <View style={styles.cardTextContainer}>
-        <Text style={styles.cardTitle}>{props.item.name} аааааааааааааааааааааааааааааааааааааааааа</Text>
+        <Text style={styles.cardTitle}>{props.item.name}</Text>
         <View style={styles.ratingContainer}>
-            <Text style={styles.ratingText}>4.5 / 5</Text>
-            <Image source={RatingIcon} style={styles.ratingIcon}/>
+          <Text style={styles.ratingText}>4.5 / 5</Text>
+          <Image source={RatingIcon} style={styles.ratingIcon} />
         </View>
         <Text style={styles.distance}>Растояние : 1.2km </Text>
       </View>
@@ -84,5 +87,5 @@ const styles = StyleSheet.create({
   distance: {
     fontSize: 16,
     color: "#CCCCCC",
-  }
+  },
 });

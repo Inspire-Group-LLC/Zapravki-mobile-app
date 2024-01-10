@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image, SafeAreaView } from "react-native";
 // import MapView, { Marker, Callout } from "react-native-maps";
 import HomePage from "./components/HomePage/HomePage";
 import AllStations from "./components/AllStations/AllStations";
@@ -15,14 +15,14 @@ export default function App() {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <HomePage isOpen={isOpen} style={styles.homePage} />
-      { !isOpen && 
+      {!isOpen && (
         <View>
           <AllStations />
         </View>
-      }
-    </View>
+      )}
+    </SafeAreaView>
   );
 }
 
@@ -39,5 +39,5 @@ const styles = StyleSheet.create({
     position: "relative",
     width: "100%",
     height: "100%",
-  }
+  },
 });

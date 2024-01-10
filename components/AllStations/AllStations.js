@@ -29,32 +29,26 @@ export default function AllStations() {
     fetchData();
   }, []);
 
-
   return (
     <>
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
         <ScrollView style={styles.containerWrapper}>
           <View style={styles.filters}>
             <Text style={styles.heading}>Ближайшие Заправки</Text>
             <Image source={FiltersIcon} style={styles.filterIconStyles} />
           </View>
-          {
-            dataFromUrl && dataFromUrl.map((item, index) => {
-              return (
-                <StationCard key={index} item={item}/>
-              )
-            })
-          }
-          
+          {dataFromUrl &&
+            dataFromUrl.map((item, index) => {
+              return <StationCard key={index} item={item} />;
+            })}
         </ScrollView>
-      </SafeAreaView>
+      </View>
     </>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 50,
     width: "100%",
     backgroundColor: "#2F2F2F",
   },
@@ -65,6 +59,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: 20,
+    paddingTop: 20,
   },
   filterIconStyles: {
     width: 21,
