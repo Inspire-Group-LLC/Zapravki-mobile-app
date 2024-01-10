@@ -1,31 +1,36 @@
 import React from "react";
-import { View, StyleSheet, Image, Text, Button } from "react-native";
+import { View, StyleSheet, Image, Text, Pressable } from "react-native";
 import FuelStationSvg from "../../assets/png/fuel-station.png";
 import Logo from "../../assets/png/logo.png";
 
-export default function HomePage() {
-  return (
-    <View style={styles.container}>
-      <Image source={FuelStationSvg} style={styles.previewImage} />
-      <Text style={styles.heading}>
-        Самая большая карта {"\n"}
-        заправок в Узбекистане
-      </Text>
-      <Text style={styles.paragraph}>
-        Для начала работы нажмите {"\n"} на кнопку "Найти заправку"
-      </Text>
+export default function HomePage(props) {
 
-      <View style={styles.buttonsWrapper}>
-        <View style={styles.button} >
-          <Text style={styles.buttonText}>Найти заправку</Text>
+  return (
+    <>
+      {props.isOpen && (
+        <View style={styles.container}>
+          <Image source={FuelStationSvg} style={styles.previewImage} />
+          <Text style={styles.heading}>
+            Самая большая карта {"\n"}
+            заправок в Узбекистане
+          </Text>
+          {/* <Text style={styles.paragraph}>
+            Для начала работы нажмите {"\n"} на кнопку "Найти заправку"
+          </Text> */}
+
+          <View style={styles.buttonsWrapper}>
+            {/* <Pressable style={styles.button}>
+              <Text style={styles.buttonText}>Найти заправку</Text>
+            </Pressable>
+            <Pressable style={styles.button} onPress={openMap}>
+              <Text style={styles.buttonText}>Все Заправки</Text>
+            </Pressable> */}
+          </View>
+          <Text style={styles.footerText}>avtoenergy.uz</Text>
+          <Image source={Logo} style={styles.logo} />
         </View>
-        <View style={styles.button}>
-          <Text style={styles.buttonText}>Все Заправки</Text>
-        </View>
-      </View>
-      <Text style={styles.footerText}>avtoenergy.uz</Text>
-      <Image source={Logo} style={styles.logo} />
-    </View>
+      )}
+    </>
   );
 }
 
