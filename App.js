@@ -20,6 +20,7 @@ export default function App() {
       {!isOpen && (
         <View>
           <AllStations />
+          <StatusBar style="auto" />
         </View>
       )}
     </SafeAreaView>

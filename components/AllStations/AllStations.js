@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     backgroundColor: "#2F2F2F",
+    paddingTop: 40,
   },
   filters: {
     width: "100%",
@@ -59,7 +60,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: 20,
-    paddingTop: 20,
   },
   filterIconStyles: {
     width: 21,

@@ -2,6 +2,7 @@ import React from "react";
 import { View, StyleSheet, Image, Text, Pressable } from "react-native";
 import FuelStationSvg from "../../assets/png/fuel-station.png";
 import Logo from "../../assets/png/logo.png";
+import Loader from "../../assets/loader.gif";
 
 export default function HomePage(props) {
   return (
@@ -25,7 +26,7 @@ export default function HomePage(props) {
               <Text style={styles.buttonText}>Все Заправки</Text>
             </Pressable> */}
             <Image
-              source={{ uri: "http://www.clicktorelease.com/code/gif/1.gif" }}
+              source={Loader}
               style={{ width: 100, height: 100 }}
             />
           </View>

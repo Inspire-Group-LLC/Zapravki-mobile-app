@@ -9,14 +9,14 @@ export default function Stationcard(props) {
     <View style={styles.cardContainer}>
       <View style={styles.cardLogoContainer}>
         <Image
-          style={styles.cardImage}
+          style={styles.cardImage }
           source={{ uri: `${props.item.logo}` }}
         />
       </View>
       <View style={styles.cardTextContainer}>
         <Text style={styles.cardTitle}>{props.item.name}</Text>
         <View style={styles.ratingContainer}>
-          <Text style={styles.ratingText}>4.5 / 5</Text>
+          <Text style={styles.ratingText}>{!props.item.rating ? "5.0" : props.item.rating} / 5</Text>
           <Image source={RatingIcon} style={styles.ratingIcon} />
         </View>
         <Text style={styles.distance}>Растояние : 1.2km </Text>
@@ -50,7 +50,8 @@ const styles = StyleSheet.create({
   cardImage: {
     width: 100,
     height: 100,
-    objectFit: "cover",
+    backgroundColor: "#fff",
+    objectFit: "contain",
   },
   cardTextContainer: {
     display: "flex",
@@ -63,7 +64,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
     color: "#fff",
-    textOverflow: "ellipsis",
     overflow: "hidden",
     paddingRight: 16,
   },
