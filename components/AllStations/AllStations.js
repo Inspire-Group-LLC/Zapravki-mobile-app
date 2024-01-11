@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     backgroundColor: "#2F2F2F",
-    paddingTop: 20,
+    paddingTop: 40,
   },
   filters: {
     width: "100%",
