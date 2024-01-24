@@ -6,42 +6,46 @@ import {
   Image,
   SafeAreaView,
   ScrollView,
+  Button,
+  TouchableOpacity,
 } from "react-native";
-import MapView, { Marker, Callout } from "react-native-maps";
 import StationCard from "./StationCard";
 import FiltersIcon from "../../assets/png/filters.png";
 
-export default function AllStations() {
-  const apiUrl = "http://24.199.110.105:8500/api/";
-  const [dataFromUrl, setDataFromUrl] = useState(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(apiUrl);
-        const data = await response.json();
-        setDataFromUrl(data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
+export default function AllStations({ route, navigation }) {
+  const { dataFromUrl } = route.params;
 
   return (
     <>
       <View style={styles.container}>
         <ScrollView style={styles.containerWrapper}>
           <View style={styles.filters}>
-            <Text style={styles.heading}>Ближайшие Заправки</Text>
+            <Text style={styles.heading}>Все Заправки</Text>
             <Image source={FiltersIcon} style={styles.filterIconStyles} />
           </View>
           {dataFromUrl &&
             dataFromUrl.map((item, index) => {
-              return <StationCard key={index} item={item} />;
+              return (
+                <TouchableOpacity
+                  key={index}
+                  onPress={() =>
+                    navigation.navigate("StationDetails", {
+                      dataFromUrl,
+                      item,
+                    })
+                  }
+                >
+                  <StationCard item={item} />
+                </TouchableOpacity>
+              );
             })}
         </ScrollView>
+        <TouchableOpacity
+          style={styles.showOnMapButton}
+          onPress={() => navigation.navigate("MapRoot", { dataFromUrl })}
+        >
+          <Text style={styles.buttonText}>Показать на карте</Text>
+        </TouchableOpacity>
       </View>
     </>
   );
@@ -52,6 +56,8 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: "#2F2F2F",
     paddingTop: 40,
+    flex: 1,
+    height: "100%",
   },
   filters: {
     width: "100%",
@@ -73,5 +79,16 @@ const styles = StyleSheet.create({
   containerWrapper: {
     paddingHorizontal: 20,
     height: "100%",
+  },
+  showOnMapButton: {
+    backgroundColor: "#0094FF",
+    height: 50,
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  buttonText: {
+    color: "white",
+    fontSize: 18,
   },
 });

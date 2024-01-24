@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, Image, SafeAreaView } from "react-native";
-import MapView, { Marker, Callout } from "react-native-maps";
-import Lukoil from "../../assets/png/lukoil.png";
-import RatingIcon from "../../assets/png/rating.png";
+import { Ionicons } from "@expo/vector-icons";
+// import RatingIcon from "../../assets/png/rating.png";
 
 export default function Stationcard(props) {
   return (
@@ -17,7 +16,7 @@ export default function Stationcard(props) {
         <Text style={styles.cardTitle}>{props.item.name}</Text>
         <View style={styles.ratingContainer}>
           <Text style={styles.ratingText}>{!props.item.rating ? "5.0" : props.item.rating} / 5</Text>
-          <Image source={RatingIcon} style={styles.ratingIcon} />
+          <Ionicons name="star" size={15} style={styles.ratingIcon} color="yellow" />
         </View>
         <Text style={styles.distance}>Растояние : 1.2km </Text>
       </View>
@@ -78,10 +77,7 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontWeight: "bold",
   },
-  ratingIcon: {
-    width: 15,
-    height: 15,
-    objectFit: "cover",
+  ratingIcon:{
     marginLeft: 5,
   },
   distance: {

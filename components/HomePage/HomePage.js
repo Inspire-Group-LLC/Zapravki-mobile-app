@@ -1,39 +1,53 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Image, Text, Pressable } from "react-native";
 import FuelStationSvg from "../../assets/png/fuel-station.png";
 import Logo from "../../assets/png/logo.png";
 import Loader from "../../assets/loader.gif";
-  
-export default function HomePage(props) {
+import axios from "axios";
+
+export default function HomePage({ navigation }) {
+  const apiUrl = "https://avtoenergy-admin.uz/api/";
+  const [dataFromUrl, setDataFromUrl] = useState("");
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const response = await axios.get(apiUrl);
+        navigation.navigate("AllStations", { dataFromUrl: response.data });
+        setDataFromUrl(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    getData();
+  }, []);
+
   return (
     <>
-      {props.isOpen && (
-        <View style={styles.container}>
-          <Image source={FuelStationSvg} style={styles.previewImage} />
-          <Text style={styles.heading}>
-            Самая большая карта {"\n"}
-            заправок в Узбекистане
-          </Text>
-          {/* <Text style={styles.paragraph}>
-            Для начала работы нажмите {"\n"} на кнопку "Найти заправку"
-          </Text> */}
-
-          <View style={styles.buttonsWrapper}>
-            {/* <Pressable style={styles.button}>
-              <Text style={styles.buttonText}>Найти заправку</Text>
+      <View style={styles.container}>
+        <Image source={FuelStationSvg} style={styles.previewImage} />
+        <View style={styles.buttonsWrapper}>
+          {dataFromUrl ? (
+            <Pressable
+              style={styles.button}
+              onPress={() =>
+                navigation.navigate("AllStations", { dataFromUrl })
+              }
+            >
+              <Text style={styles.buttonText}>Все заправки</Text>
             </Pressable>
-            <Pressable style={styles.button} onPress={openMap}>
-              <Text style={styles.buttonText}>Все Заправки</Text>
-            </Pressable> */}
-            <Image
-              source={Loader}
-              style={{ width: 100, height: 100 }}
-            />
-          </View>
-          <Text style={styles.footerText}>avtoenergy.uz</Text>
-          <Image source={Logo} style={styles.logo} />
+          ) : (
+            <Image source={Loader} style={{ width: 50, height: 50 }} />
+          )}
         </View>
-      )}
+        <Text style={styles.heading}>
+          Самая большая карта {"\n"}
+          заправок в Узбекистане
+        </Text>
+        <Text style={styles.footerText}>avtoenergy.uz</Text>
+        <Image source={Logo} style={styles.logo} />
+      </View>
     </>
   );
 }
@@ -66,7 +80,7 @@ const styles = StyleSheet.create({
     right: 0,
   },
   previewImage: {
-    width: "100%",
+    maxWidth: "100%",
     maxWidth: 300,
     maxHeight: 300,
   },
