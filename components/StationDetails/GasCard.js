@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, Image, SafeAreaView } from "react-native";
+import { Languages } from "../AllStations/Languages";
 import { Ionicons } from "@expo/vector-icons";
 
 export default function GasCard(props) {
   const { gasoline } = props;
+  const { language } = props;
   const formattedPrice = new Intl.NumberFormat("ru-RU", {
     minimumFractionDigits: 1,
     maximumFractionDigits: 1,
@@ -21,15 +23,15 @@ export default function GasCard(props) {
           <Text style={styles.cardTitle}>{gasoline.name}</Text>
         </View>
         <View style={styles.cardTextContainer}>
-          <Text style={styles.price}>Цена: {formattedPrice} UZS</Text>
+          <Text style={styles.price}>{Languages[language].price}: {formattedPrice} UZS</Text>
         </View>
       </View>
       <View style={styles.origin}>
-        <Text style={styles.originText}>Производство: {gasoline.origin}</Text>
+        <Text style={styles.originText}>{Languages[language].origin}: {gasoline.origin}</Text>
         <View style={styles.originWrapper}>
           {gasoline.available ? (
             <>
-              <Text style={styles.availablityText}>Сейчас доступен</Text>
+              <Text style={styles.availablityText}>{Languages[language].available}</Text>
               <Ionicons
                 name="checkmark-circle-outline"
                 size={19}
@@ -39,7 +41,7 @@ export default function GasCard(props) {
             </>
           ) : (
             <>
-              <Text style={styles.availablityText}>Нет в наличии</Text>
+              <Text style={styles.availablityText}>{Languages[language].notAvailable}</Text>
               <Ionicons
                 name="close-circle-outline"
                 size={19}

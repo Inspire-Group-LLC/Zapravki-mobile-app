@@ -10,10 +10,12 @@ import {
 import MapView, { Marker, Callout } from "react-native-maps";
 import { StatusBar } from "expo-status-bar";
 import * as Location from "expo-location";
+import { Languages } from "../AllStations/Languages";
 import { Ionicons } from "@expo/vector-icons";
 
 export default function MapRoot({ route, navigation }) {
   const { dataFromUrl } = route.params;
+  const { language } = route.params;
   
   const [mapType, setMapType] = useState("standard");
   const [locationPermissionVisible, setLocationPermissionVisible] =
@@ -127,7 +129,7 @@ export default function MapRoot({ route, navigation }) {
           onPress={getLocationAsync}
         >
           <Text style={styles.locationPermissionButtonText}>
-            Отслеживать Геопозицию
+            {Languages[language].locationPermission}
           </Text>
         </TouchableOpacity>
       )}

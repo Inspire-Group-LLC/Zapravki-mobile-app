@@ -8,16 +8,18 @@ import {
   ScrollView,
   Alert,
   Image,
+  Linking,
 } from "react-native";
-import RatingIcon from "../../assets/png/rating.png";
 import MapView, { Marker, Callout } from "react-native-maps";
 import { StatusBar } from "expo-status-bar";
 import * as Location from "expo-location";
 import { Ionicons } from "@expo/vector-icons";
+import { Languages } from "../AllStations/Languages";
 import GasCard from "./GasCard";
 
 export default function StationDetails({ route, navigation }) {
   const { dataFromUrl } = route.params;
+  const { language } = route.params;
   const { item } = route.params;
   const [mapHeight, setMapHeight] = useState({
     height: "30%",
@@ -173,16 +175,20 @@ export default function StationDetails({ route, navigation }) {
             </View>
 
             <Text style={styles.subheading}>
-              {item.address} (Открыто с 6:00 - 21:00){" "}
+              {item.address} ({Languages[language].openFrom} 6:00 - 21:00){" "}
             </Text>
 
             {item.gasolines.map((gasoline, index) => {
-              return <GasCard gasoline={gasoline} key={index} />;
+              return (
+                <GasCard language={language} gasoline={gasoline} key={index} />
+              );
             })}
 
             <View style={styles.footerDetails}>
               <View style={styles.contactsTextWrapper}>
-                <Text style={styles.contactsText}>Контакты</Text>
+                <Text style={styles.contactsText}>
+                  {Languages[language].contacts}
+                </Text>
                 <Ionicons
                   name="information-circle-outline"
                   size={24}
@@ -191,20 +197,18 @@ export default function StationDetails({ route, navigation }) {
                 />
               </View>
               <View style={styles.phoneNum}>
-                <Text style={styles.phoneNumText}>+998 99 999 99 99</Text>
-                <Ionicons
-                  name="call-outline"
-                  size={20}
-                  color="lightblue"
-                />
+                <TouchableOpacity
+                  onPress={() => Linking.openURL(`tel:+998 99 999 99 99`)}
+                >
+                  <Text style={styles.phoneNumText}>+998 99 999 99 99</Text>
+                </TouchableOpacity>
+                <Ionicons name="call-outline" size={20} color="lightblue" />
               </View>
               <View style={styles.phoneNum}>
-                <Text style={styles.phoneNumText}>{item.address} (Открыто с 6:00 - 21:00)</Text>
-                <Ionicons
-                  name="location-outline"
-                  size={20}
-                  color="lightblue"
-                />
+                <Text style={styles.phoneNumText}>
+                  {item.address} ({Languages[language].openFrom} 6:00 - 21:00)
+                </Text>
+                <Ionicons name="location-outline" size={20} color="lightblue" />
               </View>
             </View>
           </ScrollView>
@@ -239,7 +243,7 @@ const styles = StyleSheet.create({
   },
   heading: {
     color: "white",
-    fontSize: 24,
+    fontSize: 22,
     textAlign: "left",
     fontWeight: "bold",
     lineHeight: 25,

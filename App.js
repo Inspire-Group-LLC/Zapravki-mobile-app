@@ -3,6 +3,7 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, Image, SafeAreaView } from "react-native";
 import HomePage from "./components/HomePage/HomePage";
 import AllStations from "./components/AllStations/AllStations";
+import Filters from "./components/AllStations/Filters";
 import MapRoot from "./components/MapRoot/MapRoot";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -10,32 +11,7 @@ import StationDetails from "./components/StationDetails/StationDetails";
 
 const Stack = createNativeStackNavigator();
 
-export default function App({ navigation }) {
-  // const apiUrl = "https://avtoenergy-admin.uz/api/";
-  // const [dataFromUrl, setDataFromUrl] = useState("");
-  // const [currentStage, setCurrentStage] = useState("HomePage");
-  // const [region, setRegion] = useState({
-  //   // Default region (for example, center of a city)
-  //   latitude: 41.310878,
-  //   longitude: 69.279292,
-  //   latitudeDelta: 0.0922,
-  //   longitudeDelta: 0.0421,
-  // });
-
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     try {
-  //       const response = await axios.get(apiUrl);
-  //       setDataFromUrl(response.data);
-  //       // setCurrentStage("AllStations");
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   };
-
-  //   getData();
-  // }, []);
-
+export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.areaWrapper}>
@@ -49,6 +25,11 @@ export default function App({ navigation }) {
             <Stack.Screen
               name="AllStations"
               component={AllStations}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Filters"
+              component={Filters}
               options={{ headerShown: false }}
             />
             <Stack.Screen

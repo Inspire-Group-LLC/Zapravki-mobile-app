@@ -1,24 +1,38 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, Image, SafeAreaView } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-// import RatingIcon from "../../assets/png/rating.png";
+import * as Location from "expo-location";
+import { Languages } from "./Languages";
 
-export default function Stationcard(props) {
+export default function StationCard(props) {
+  const { item } = props;
+  const { language } = props;
+  const [distance, setDistance] = useState(0);
+
   return (
     <View style={styles.cardContainer}>
       <View style={styles.cardLogoContainer}>
         <Image
-          style={styles.cardImage }
+          style={styles.cardImage}
           source={{ uri: `${props.item.logo}` }}
         />
       </View>
       <View style={styles.cardTextContainer}>
         <Text style={styles.cardTitle}>{props.item.name}</Text>
         <View style={styles.ratingContainer}>
-          <Text style={styles.ratingText}>{!props.item.rating ? "5.0" : props.item.rating} / 5</Text>
-          <Ionicons name="star" size={15} style={styles.ratingIcon} color="yellow" />
+          <Text style={styles.ratingText}>
+            {!props.item.rating ? "5.0" : props.item.rating} / 5
+          </Text>
+          <Ionicons
+            name="star"
+            size={15}
+            style={styles.ratingIcon}
+            color="yellow"
+          />
         </View>
-        <Text style={styles.distance}>Растояние : 1.2km </Text>
+        <Text style={styles.distance}>
+          {Languages[language].distance} : {item.distance} km
+        </Text>
       </View>
     </View>
   );
@@ -50,7 +64,8 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     backgroundColor: "#fff",
-    objectFit: "contain",
+    objectFit: "cover",
+    // objectFit: "contain",
   },
   cardTextContainer: {
     display: "flex",
@@ -77,11 +92,11 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontWeight: "bold",
   },
-  ratingIcon:{
+  ratingIcon: {
     marginLeft: 5,
   },
   distance: {
     fontSize: 16,
     color: "#CCCCCC",
-  },
+  }
 });

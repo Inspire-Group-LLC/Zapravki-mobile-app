@@ -3,24 +3,36 @@ import { View, StyleSheet, Image, Text, Pressable } from "react-native";
 import FuelStationSvg from "../../assets/png/fuel-station.png";
 import Logo from "../../assets/png/logo.png";
 import Loader from "../../assets/loader.gif";
+import * as Location from "expo-location";
 import axios from "axios";
 
 export default function HomePage({ navigation }) {
-  const apiUrl = "https://avtoenergy-admin.uz/api/";
   const [dataFromUrl, setDataFromUrl] = useState("");
 
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const response = await axios.get(apiUrl);
-        navigation.navigate("AllStations", { dataFromUrl: response.data });
-        setDataFromUrl(response.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+  const getNearestGasStation = async () => {
+    try {
+      let { status } = await Location.requestForegroundPermissionsAsync();
 
-    getData();
+      if (status !== "granted") {
+        return;
+      }
+
+      let currentLocation = await Location.getCurrentPositionAsync({});
+
+      const response = await axios.get(
+        `https://avtoenergy-admin.uz/api/closest/${currentLocation.coords.latitude}/${currentLocation.coords.longitude}`
+      );
+
+      navigation.navigate("AllStations", {
+        dataFromUrl: response.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getNearestGasStation();
   }, []);
 
   return (

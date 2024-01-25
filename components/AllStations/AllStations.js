@@ -11,17 +11,69 @@ import {
 } from "react-native";
 import StationCard from "./StationCard";
 import FiltersIcon from "../../assets/png/filters.png";
+import { Ionicons } from "@expo/vector-icons";
+import Icon from "react-native-ico-flags";
+import { Languages } from "./Languages";
 
 export default function AllStations({ route, navigation }) {
   const { dataFromUrl } = route.params;
+  const { routeTitle } = route.params;
+  const [language, setLanguage] = useState("uz");
+  const [title, setTitle] = useState(Languages[language].allstations);
+
+  const changeLanguage = () => {
+    if (language === "uz") {
+      setLanguage("ru");
+    } else if (language === "ru") {
+      setLanguage("en");
+    } else {
+      setLanguage("uz");
+    }
+  };
+
+  useEffect(() => {
+    if (routeTitle) {
+      setTitle(routeTitle);
+    }
+  }, [routeTitle]); 
+
+  useEffect(() => {
+    setTitle(Languages[language].allstations);
+  }, [language]); 
 
   return (
     <>
       <View style={styles.container}>
         <ScrollView style={styles.containerWrapper}>
           <View style={styles.filters}>
-            <Text style={styles.heading}>Все Заправки</Text>
-            <Image source={FiltersIcon} style={styles.filterIconStyles} />
+            <Text style={styles.heading}>{title}</Text>
+            <View style={styles.filtersBtns}>
+              <TouchableOpacity onPress={changeLanguage}>
+                {language === "uz" && (
+                  <Icon name="uzbekistn" width="60" height="30" />
+                )}
+                {language === "ru" && (
+                  <Icon name="russia" width="60" height="30" />
+                )}
+                {language === "en" && (
+                  <Icon
+                    name="united-states-of-america"
+                    width="60"
+                    height="30"
+                  />
+                )}
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate("Filters", {
+                    dataFromUrl,
+                    language,
+                  })
+                }
+              >
+                <Image source={FiltersIcon} style={styles.filterIconStyles} />
+              </TouchableOpacity>
+            </View>
           </View>
           {dataFromUrl &&
             dataFromUrl.map((item, index) => {
@@ -32,19 +84,22 @@ export default function AllStations({ route, navigation }) {
                     navigation.navigate("StationDetails", {
                       dataFromUrl,
                       item,
+                      language,
                     })
                   }
                 >
-                  <StationCard item={item} />
+                  <StationCard item={item} language={language} />
                 </TouchableOpacity>
               );
             })}
         </ScrollView>
         <TouchableOpacity
           style={styles.showOnMapButton}
-          onPress={() => navigation.navigate("MapRoot", { dataFromUrl })}
+          onPress={() =>
+            navigation.navigate("MapRoot", { dataFromUrl, language })
+          }
         >
-          <Text style={styles.buttonText}>Показать на карте</Text>
+          <Text style={styles.buttonText}>{Languages[language].showOnMap}</Text>
         </TouchableOpacity>
       </View>
     </>
@@ -70,6 +125,7 @@ const styles = StyleSheet.create({
   filterIconStyles: {
     width: 21,
     height: 21,
+    marginLeft: 10,	
     objectFit: "cover",
   },
   heading: {
@@ -79,6 +135,12 @@ const styles = StyleSheet.create({
   containerWrapper: {
     paddingHorizontal: 20,
     height: "100%",
+  },
+  filtersBtns: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   showOnMapButton: {
     backgroundColor: "#0094FF",
