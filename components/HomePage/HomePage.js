@@ -22,10 +22,11 @@ export default function HomePage({ navigation }) {
       const response = await axios.get(
         `https://avtoenergy-admin.uz/api/closest/${currentLocation.coords.latitude}/${currentLocation.coords.longitude}`
       );
-
+      setDataFromUrl(response.data);
       navigation.navigate("AllStations", {
         dataFromUrl: response.data,
       });
+      
     } catch (error) {
       console.log(error);
     }

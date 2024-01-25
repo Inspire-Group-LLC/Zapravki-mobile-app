@@ -16,7 +16,7 @@ import { Ionicons } from "@expo/vector-icons";
 export default function MapRoot({ route, navigation }) {
   const { dataFromUrl } = route.params;
   const { language } = route.params;
-  
+
   const [mapType, setMapType] = useState("standard");
   const [locationPermissionVisible, setLocationPermissionVisible] =
     useState(true);
@@ -123,6 +123,16 @@ export default function MapRoot({ route, navigation }) {
           style={styles.mapTypeButtonText}
         />
       </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.showDetailsBtn}
+        onPress={() =>
+          navigation.navigate("AllStations", { dataFromUrl, language })
+        }
+      >
+        <Text style={styles.buttonText}>
+          <Ionicons name="arrow-back" size={30} color="white" />
+        </Text>
+      </TouchableOpacity>
       {locationPermissionVisible && (
         <TouchableOpacity
           style={styles.locationPermissionButton}
@@ -165,6 +175,17 @@ const styles = StyleSheet.create({
     left: 12,
     backgroundColor: "#fff",
     padding: 10,
+    borderRadius: 5,
+  },
+  showDetailsBtn: {
+    backgroundColor: "#0094FF",
+    position: "absolute",
+    top: 52,
+    left: 12,
+    height: 50,
+    width: 50,
+    justifyContent: "center",
+    alignItems: "center",
     borderRadius: 5,
   },
   locationPermissionButtonText: {

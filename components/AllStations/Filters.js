@@ -14,7 +14,6 @@ import { Ionicons } from "@expo/vector-icons";
 export default function Filters({ route, navigation }) {
   const { dataFromUrl } = route.params;
   const { language } = route.params;
-  const [filteredData, setFilteredData] = useState([]);
 
   const getNearestGasStation = async () => {
     navigation.navigate("AllStations", {
@@ -55,12 +54,6 @@ export default function Filters({ route, navigation }) {
           </TouchableOpacity>
           <View style={styles.nearestbyTypeContainer}></View>
         </ScrollView>
-        {/* <TouchableOpacity
-          style={styles.showOnMapButton}
-          onPress={() => navigation.navigate("MapRoot", { dataFromUrl, language })}
-        >
-          <Text style={styles.buttonText}>Показать Результат</Text>
-        </TouchableOpacity> */}
       </View>
     </>
   );

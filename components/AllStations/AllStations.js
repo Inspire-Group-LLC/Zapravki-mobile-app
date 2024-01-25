@@ -57,7 +57,7 @@ export default function AllStations({ route, navigation }) {
                 )}
                 {language === "en" && (
                   <Icon
-                    name="united-states-of-america"
+                    name="united-kingdom"
                     width="60"
                     height="30"
                   />
