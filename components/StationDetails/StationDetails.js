@@ -16,6 +16,7 @@ import * as Location from "expo-location";
 import { Ionicons } from "@expo/vector-icons";
 import { Languages } from "../AllStations/Languages";
 import GasCard from "./GasCard";
+import { PROVIDER_GOOGLE } from 'react-native-maps';
 
 export default function StationDetails({ route, navigation }) {
   const { dataFromUrl } = route.params;
@@ -85,6 +86,7 @@ export default function StationDetails({ route, navigation }) {
         <MapView
           style={mapHeight}
           region={region}
+          provider={PROVIDER_GOOGLE}
           showsUserLocation={true}
           showsMyLocationButton={true}
           showsCompass={true}

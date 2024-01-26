@@ -12,6 +12,7 @@ import { StatusBar } from "expo-status-bar";
 import * as Location from "expo-location";
 import { Languages } from "../AllStations/Languages";
 import { Ionicons } from "@expo/vector-icons";
+import { PROVIDER_GOOGLE } from 'react-native-maps';
 
 export default function MapRoot({ route, navigation }) {
   const { dataFromUrl } = route.params;
@@ -73,6 +74,7 @@ export default function MapRoot({ route, navigation }) {
       {dataFromUrl && dataFromUrl.length > 0 && (
         <MapView
           style={styles.map}
+          provider={PROVIDER_GOOGLE}
           region={region}
           showsUserLocation={true}
           showsMyLocationButton={true}

@@ -15,14 +15,23 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "config": {
+        "googleMapsApiKey": "AIzaSyDqB5NndfbKL7ATiACK6zuNeqlMgyZxIb8"
+      },
+      "bundleIdentifier": "com.timakasimovkra.zapravkiapp"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.timakasimovkra.zapravkiapp"
+      "package": "com.timakasimovkra.zapravkiapp",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyCuAP7ksRJPSyC_3vJlrrkL3XSUfimaO_0"
+        }
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
