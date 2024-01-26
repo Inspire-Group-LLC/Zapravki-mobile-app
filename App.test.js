@@ -1,11 +1,11 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
+import React from "react";
+import renderer from "react-test-renderer";
 
-import App from './App';
+import HomePage from "./components/HomePage/HomePage";
 
-describe('<App />', () => {
-  it('has 1 child', () => {
-    const tree = renderer.create(<App />).toJSON();
-    expect(tree.children.length).toBe(1);
+describe(<HomePage />, () => {
+  it("renders correctly", () => {
+    const tree = renderer.create(<HomePage />).toJSON();
+    expect(tree).toMatchSnapshot();
   });
 });
