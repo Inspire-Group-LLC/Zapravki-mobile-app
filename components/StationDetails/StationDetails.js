@@ -16,7 +16,7 @@ import * as Location from "expo-location";
 import { Ionicons } from "@expo/vector-icons";
 import { Languages } from "../AllStations/Languages";
 import GasCard from "./GasCard";
-import { PROVIDER_GOOGLE } from 'react-native-maps';
+import { PROVIDER_GOOGLE } from "react-native-maps";
 
 export default function StationDetails({ route, navigation }) {
   const { dataFromUrl } = route.params;
@@ -177,7 +177,8 @@ export default function StationDetails({ route, navigation }) {
             </View>
 
             <Text style={styles.subheading}>
-              {item.address} ({Languages[language].openFrom} 6:00 - 21:00){" "}
+              {item.address} ({Languages[language].openFrom} {item.opens_at} -{" "}
+              {item.closes_at}){" "}
             </Text>
 
             {item.gasolines.map((gasoline, index) => {
@@ -208,7 +209,8 @@ export default function StationDetails({ route, navigation }) {
               </View>
               <View style={styles.phoneNum}>
                 <Text style={styles.phoneNumText}>
-                  {item.address} ({Languages[language].openFrom} 6:00 - 21:00)
+                  {item.address} ({Languages[language].openFrom} {item.opens_at}{" "}
+                  - {item.closes_at})
                 </Text>
                 <Ionicons name="location-outline" size={20} color="lightblue" />
               </View>
