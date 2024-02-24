@@ -35,6 +35,8 @@ export default function AllStations({ route, navigation }) {
     if (routeTitle) {
       setTitle(routeTitle);
     }
+
+    console.log(dataFromUrl);
   }, [routeTitle]); 
 
   useEffect(() => {

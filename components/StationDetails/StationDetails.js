@@ -176,9 +176,9 @@ export default function StationDetails({ route, navigation }) {
               </View>
             </View>
 
-            <Text style={styles.subheading}>
-              {item.address} ({Languages[language].openFrom} {item.opens_at} -{" "}
-              {item.closes_at}){" "}
+            <Text style={styles.subheading}>{item.address}</Text>
+            <Text style={styles.workingHours}>
+              {Languages[language].openFrom} {item.opens_at} - {item.closes_at}
             </Text>
 
             {item.gasolines.map((gasoline, index) => {
@@ -253,11 +253,17 @@ const styles = StyleSheet.create({
     lineHeight: 25,
   },
   subheading: {
-    color: "grey",
+    color: "#aaaaaa",
+    fontSize: 16,
+    textAlign: "left",
+    marginBottom: 5,
+  },
+  workingHours:{
+    color: "#aaaaaa",
     fontSize: 16,
     textAlign: "left",
     marginBottom: 20,
-  },
+  },  
   showDetailsBtn: {
     backgroundColor: "#0094FF",
     position: "absolute",

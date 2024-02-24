@@ -27,6 +27,8 @@ export default function HomePage({ navigation }) {
         dataFromUrl: response.data,
       });
       
+      global.AllStations = response.data;
+      
     } catch (error) {
       console.log(error);
     }
