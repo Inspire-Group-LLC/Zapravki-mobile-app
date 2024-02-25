@@ -12,6 +12,7 @@ export const Languages = {
         locationPermission: "Geolokatsiyani kuzatish",
         nearestGasStations: "Eng yaqin AЗС",
         filters: "Filtrlar",
+        openInMaps: "Stansiyaga borish",
     },
     ru: {
         allstations: "Все Заправки",
@@ -26,6 +27,7 @@ export const Languages = {
         locationPermission : "Отслеживать геолокацию",
         nearestGasStations: "Ближайшие AЗС",
         filters: "Фильтры",
+        openInMaps: "Поехать на станцию",
     },
     en: {
         allstations: "All Stations",
@@ -40,6 +42,7 @@ export const Languages = {
         locationPermission: "Track Location",
         nearestGasStations: "Nearest Gas Stations",
         filters: "Filters",
+        openInMaps: "Open in Maps",
     },
 };
 

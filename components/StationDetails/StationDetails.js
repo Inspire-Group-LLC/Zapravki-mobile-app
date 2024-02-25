@@ -229,6 +229,16 @@ export default function StationDetails({ route, navigation }) {
           </Text>
         </TouchableOpacity>
       )}
+
+        <TouchableOpacity 
+          style={styles.locationPermissionButton}
+          onPress={() => Linking.openURL(`google.navigation:q=${item.latitude},${item.longitude}`)}
+        >
+          <Text style={styles.locationPermissionButtonText}>
+            {Languages[language].openInMaps}
+          </Text>
+        </TouchableOpacity>
+          
     </SafeAreaView>
   );
 }
@@ -238,7 +248,7 @@ const styles = StyleSheet.create({
     height: "100%",
     width: "100%",
     paddingTop: 29,
-    paddingBottom: 15,
+    paddingBottom: 45,
     backgroundColor: "#2F2F2F",
   },
   containerWrapper: {
@@ -396,5 +406,22 @@ const styles = StyleSheet.create({
     marginRight: 7,
     color: "#ccc",
     fontWeight: "normal",
+  },
+  locationPermissionButton: {
+    position: "absolute",
+    width: "100%",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    bottom: 0,
+    left: 0,
+    backgroundColor: "#0094FF",
+    padding: 15,
+  },
+  locationPermissionButtonText: {
+    color: "white",
+    fontSize: 18,
+    fontWeight: "bold",
   },
 });
