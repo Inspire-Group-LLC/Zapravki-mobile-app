@@ -9,6 +9,8 @@ import {
   Button,
   TouchableOpacity,
 } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import StationCard from "./StationCard";
 import FiltersIcon from "../../assets/png/filters.png";
 import { Ionicons } from "@expo/vector-icons";
@@ -21,25 +23,47 @@ export default function AllStations({ route, navigation }) {
   const [language, setLanguage] = useState("uz");
   const [title, setTitle] = useState(Languages[language].allstations);
 
-  const changeLanguage = () => {
+  const changeLanguage = async () => {
+    let newLanguage;
     if (language === "uz") {
-      setLanguage("ru");
+      newLanguage = "ru";
     } else if (language === "ru") {
-      setLanguage("en");
+      newLanguage = "en";
     } else {
-      setLanguage("uz");
+      newLanguage = "uz";
+    }
+    try {
+      await AsyncStorage.setItem("language", newLanguage);
+      setLanguage(newLanguage);
+    } catch (error) {
+      console.error("Error saving language:", error);
     }
   };
+
+  useEffect(() => {
+    const loadLanguage = async () => {
+      try {
+        const savedLanguage = await AsyncStorage.getItem("language");
+        if (savedLanguage !== null) {
+          setLanguage(savedLanguage);
+        }
+      } catch (error) {
+        console.error("Error loading language:", error);
+      }
+    };
+
+    loadLanguage();
+  }, []);
 
   useEffect(() => {
     if (routeTitle) {
       setTitle(routeTitle);
     }
-  }, [routeTitle]); 
+  }, [routeTitle]);
 
   useEffect(() => {
     setTitle(Languages[language].allstations);
-  }, [language]); 
+  }, [language]);
 
   return (
     <>
@@ -56,11 +80,7 @@ export default function AllStations({ route, navigation }) {
                   <Icon name="russia" width="60" height="30" />
                 )}
                 {language === "en" && (
-                  <Icon
-                    name="united-kingdom"
-                    width="60"
-                    height="30"
-                  />
+                  <Icon name="united-kingdom" width="60" height="30" />
                 )}
               </TouchableOpacity>
               <TouchableOpacity
@@ -125,7 +145,7 @@ const styles = StyleSheet.create({
   filterIconStyles: {
     width: 21,
     height: 21,
-    marginLeft: 10,	
+    marginLeft: 10,
     objectFit: "cover",
   },
   heading: {

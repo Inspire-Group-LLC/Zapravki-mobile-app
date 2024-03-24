@@ -13,6 +13,9 @@ export const Languages = {
         nearestGasStations: "Eng yaqin AЗС",
         filters: "Filtrlar",
         openInMaps: "Stansiyaga borish",
+        noDistanceMsg: "Masofa ko'rsatilmagan",
+        cheapestGasStations: "Yoqilg'i - ",
+        cheapestByType: "Turi bo'yicha arzon"
     },
     ru: {
         allstations: "Все Заправки",
@@ -28,6 +31,9 @@ export const Languages = {
         nearestGasStations: "Ближайшие AЗС",
         filters: "Фильтры",
         openInMaps: "Поехать на станцию",
+        noDistanceMsg: "Расстояние не указано",
+        cheapestGasStations: "Топливо - ",
+        cheapestByType: "Дешевые по типу топлива"
     },
     en: {
         allstations: "All Stations",
@@ -43,6 +49,9 @@ export const Languages = {
         nearestGasStations: "Nearest Gas Stations",
         filters: "Filters",
         openInMaps: "Open in Maps",
+        noDistanceMsg: "Distance not specified",
+        cheapestGasStations: "Fuel - ",
+        cheapestByType: "Cheapest by fuel type"
     },
 };
 

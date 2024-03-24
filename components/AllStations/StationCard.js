@@ -31,7 +31,7 @@ export default function StationCard(props) {
           />
         </View>
         <Text style={styles.distance}>
-          {Languages[language].distance} : {item.distance} km
+          {item.distance ? `${Languages[language].distance} : ${item.distance} km` : `${Languages[language].noDistanceMsg}`}
         </Text>
       </View>
     </View>
